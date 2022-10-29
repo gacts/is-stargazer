@@ -94,7 +94,7 @@ jobs:
           commit_message: Automatic distributive rebuild
 
   run-this-action:
-    name: Run action (${{ matrix.runs-on }}, version ${{ matrix.version }})
+    name: Run action (${{ matrix.runs-on }})
     runs-on: ${{ matrix.runs-on }}
     strategy:
       fail-fast: false
