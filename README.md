@@ -1,27 +1,29 @@
-# Install [DNSControl][dnscontrol] action
+# Is the user stargazer?
 
 ![Release version][badge_release_version]
 [![Build Status][badge_build]][link_build]
 [![License][badge_license]][link_license]
 
-This action installs [DNSControl][dnscontrol] as a binary file into your workflow. It can be run on **Linux** (`ubuntu-latest`) or **macOS** (`macos-latest`).
-
-- 🚀 DNSControl releases page: <https://github.com/StackExchange/dnscontrol/releases>
-
-Additionally, this action uses GitHub **caching mechanism** to speed up your workflow execution time!
+This action checks if the user is a stargazer (starred a repo or not). It can be run on **Linux** (`ubuntu-latest`), **Windows** (`windows-latest`) or **macOS** (`macos-latest`).
 
 ## Usage
 
 ```yaml
 jobs:
-  install-dnscontrol:
-    runs-on: ubuntu-20.04
+  is-stargazer:
+    runs-on: ubuntu-latest
+    id: check-star
     steps:
-      - uses: gacts/install-dnscontrol@v1
+      - uses: gacts/is-stargazer@v1
         #with:
-        #  version: 3.20.0 # `latest` by default, but you can set a specific version to install
+        #  github-token: ${{ github.token }}
+        #  username: ${{ github.actor }}
+        #  repository: ${{ github.repository }}
 
-      - run: dnscontrol version # any dnscontrol command can be executed
+      - if: steps.check-star.outputs.is-stargazer != 'true'
+        run: |
+          echo "Please, star this repo"
+          exit 1
 ```
 
 ## Customizing
@@ -38,9 +40,9 @@ Following inputs can be used as `step.with` keys:
 
 ### Outputs
 
-| Name             |   Type   | Description                        |
-|------------------|:--------:|------------------------------------|
-| `dnscontrol-bin` | `string` | Path to the dnscontrol binary file |
+| Name           |   Type   | Description                                    |
+|----------------|:--------:|------------------------------------------------|
+| `is-stargazer` | `string` | User starred a repo or not (`true` or `false`) |
 
 ## Releasing
 
@@ -64,18 +66,16 @@ If you find any action errors, please, [make an issue][link_create_issue] in the
 
 This is open-sourced software licensed under the [MIT License][link_license].
 
-[badge_build]:https://img.shields.io/github/workflow/status/gacts/install-dnscontrol/tests?maxAge=30
-[badge_release_version]:https://img.shields.io/github/release/gacts/install-dnscontrol.svg?maxAge=30
-[badge_license]:https://img.shields.io/github/license/gacts/install-dnscontrol.svg?longCache=true
-[badge_release_date]:https://img.shields.io/github/release-date/gacts/install-dnscontrol.svg?maxAge=180
-[badge_commits_since_release]:https://img.shields.io/github/commits-since/gacts/install-dnscontrol/latest.svg?maxAge=45
-[badge_issues]:https://img.shields.io/github/issues/gacts/install-dnscontrol.svg?maxAge=45
-[badge_pulls]:https://img.shields.io/github/issues-pr/gacts/install-dnscontrol.svg?maxAge=45
+[badge_build]:https://img.shields.io/github/workflow/status/gacts/is-stargazer/tests?maxAge=30
+[badge_release_version]:https://img.shields.io/github/release/gacts/is-stargazer.svg?maxAge=30
+[badge_license]:https://img.shields.io/github/license/gacts/is-stargazer.svg?longCache=true
+[badge_release_date]:https://img.shields.io/github/release-date/gacts/is-stargazer.svg?maxAge=180
+[badge_commits_since_release]:https://img.shields.io/github/commits-since/gacts/is-stargazer/latest.svg?maxAge=45
+[badge_issues]:https://img.shields.io/github/issues/gacts/is-stargazer.svg?maxAge=45
+[badge_pulls]:https://img.shields.io/github/issues-pr/gacts/is-stargazer.svg?maxAge=45
 
-[link_build]:https://github.com/gacts/install-dnscontrol/actions
-[link_license]:https://github.com/gacts/install-dnscontrol/blob/master/LICENSE
-[link_issues]:https://github.com/gacts/install-dnscontrol/issues
-[link_create_issue]:https://github.com/gacts/install-dnscontrol/issues/new
-[link_pulls]:https://github.com/gacts/install-dnscontrol/pulls
-
-[dnscontrol]:https://github.com/StackExchange/dnscontrol
+[link_build]:https://github.com/gacts/is-stargazer/actions
+[link_license]:https://github.com/gacts/is-stargazer/blob/master/LICENSE
+[link_issues]:https://github.com/gacts/is-stargazer/issues
+[link_create_issue]:https://github.com/gacts/is-stargazer/issues/new
+[link_pulls]:https://github.com/gacts/is-stargazer/pulls
