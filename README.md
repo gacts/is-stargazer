@@ -12,9 +12,9 @@ This action checks if the user is a stargazer (starred a repo or not). It can be
 jobs:
   is-stargazer:
     runs-on: ubuntu-latest
-    id: check-star
     steps:
       - uses: gacts/is-stargazer@v1
+        id: check-star
         #with:
         #  github-token: ${{ github.token }}
         #  username: ${{ github.actor }}
@@ -26,6 +26,32 @@ jobs:
           exit 1
 ```
 
+In addition, you can combine this action with, for example, [`actions/github-script`](https://github.com/actions/github-script):
+
+```yaml
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: gacts/is-stargazer@v1
+        id: check-star
+
+      - if: steps.check-star.outputs.is-stargazer != 'true'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '⭐ Please, star this repository!'
+            })
+```
+
 ## Customizing
 
 ### Inputs
@@ -34,9 +60,9 @@ Following inputs can be used as `step.with` keys:
 
 | Name           |   Type   |          Default           | Required | Description                                   |
 |----------------|:--------:|:--------------------------:|:--------:|-----------------------------------------------|
-| `github-token` | `string` |   `${{ github.token }}`    |   yes    | GitHub token                                  |
-| `username`     | `string` |   `${{ github.actor }}`    |   yes    | GitHub username to check (eg. `octocat`)      |
-| `repository`   | `string` | `${{ github.repository }}` |   yes    | Target repository (eg. `octocat/Hello-World`) |
+| `github-token` | `string` |   `${{ github.token }}`    |    no    | GitHub token                                  |
+| `username`     | `string` |   `${{ github.actor }}`    |    no    | GitHub username to check (eg. `octocat`)      |
+| `repository`   | `string` | `${{ github.repository }}` |    no    | Target repository (eg. `octocat/Hello-World`) |
 
 ### Outputs
 
