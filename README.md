@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/7326800/198824913-32caf179-f739-4a8c-b9f1-f1826e19531d.png" alt="Logo" width="150" />
+</p>
+
 # Is the user stargazer?
 
 ![Release version][badge_release_version]
