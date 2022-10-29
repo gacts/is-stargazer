@@ -1,0 +1,28 @@
+name: Is the user stargazer?
+description: Checks if the user is a stargazer (starred a repo or not)
+
+inputs:
+  github-token:
+    description: GitHub auth token. Since there's a default, this is typically not supplied by the user
+    required: false
+    default: ${{ github.token }}
+  username:
+    description: GitHub username to check (eg. octocat)
+    required: false
+    default: ${{ github.actor }}
+  repository:
+    description: Target repository (eg. octocat/Hello-World)
+    required: false
+    default: ${{ github.repository }}
+
+outputs:
+  is-stargazer:
+    description: User starred a repo or not (true|false)
+
+runs:
+  using: node16
+  main: dist/index.js
+
+branding:
+  icon: star
+  color: yellow
