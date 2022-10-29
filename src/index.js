@@ -40,7 +40,7 @@ async function runAction() {
 
   core.endGroup()
 
-  core.info('Star was' + (result ? ' ' : ' not ') + 'found')
+  core.info((result ? '✅' : '❌') + ' Star was' + (result ? ' ' : ' not ') + 'found')
 
   core.setOutput('is-stargazer', result)
 }
