@@ -15,11 +15,12 @@ async function runAction() {
   let result = false
 
   for (let pageNum = 0; ; pageNum++) {
-    // https://octokit.github.io/rest.js/v18#activity-list-repos-starred-by-authenticated-user
-    const resp = await octokit.rest.activity.listReposStarredByAuthenticatedUser({
+
+    const resp = await octokit.request('GET /users/{username}/starred', {
+      username: input.username,
       per_page: perPage,
       page: pageNum,
-    })
+    });
 
     console.log(resp)
 
@@ -60,15 +61,6 @@ async function runAction() {
   // core.endGroup()
 }
 
-// /**
-//  * @param {github.GitHub} octokit
-//  * @param {string} owner
-//  * @param {string} repo
-//  */
-// function isStarred(octokit, owner, repo) {
-//
-// }
-//
 // /**
 //  * @param {octokit.Octokit} octokit
 //  * @param {string} user
