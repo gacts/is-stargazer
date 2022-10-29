@@ -22,7 +22,8 @@ jobs:
 
       - if: steps.check-star.outputs.is-stargazer != 'true'
         uses: actions/github-script@v6
-        with: {script: core.setFailed('⭐ Please, star this repository!')}
+        with:
+          script: core.setFailed('⭐ Please, star this repository!')
 ```
 
 In addition, you can combine this action with, for example, [`actions/github-script`](https://github.com/actions/github-script):
