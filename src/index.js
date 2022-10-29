@@ -17,7 +17,7 @@ async function runAction() {
   core.startGroup('⭐ Fetching stars...')
 
   for (let pageNum = 0; ; pageNum++) {
-    core.debug(`Request stars page #${pageNum}...`)
+    core.info(`🐇 Request stars page #${pageNum}...`)
 
     const resp = await octokit.request('GET /users/{username}/starred', {
       username: input.username,
