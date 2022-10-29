@@ -110,6 +110,7 @@ jobs:
           repository: octocat/Hello-World
 
       - if: steps.test1.outputs.is-stargazer != 'true'
+        name: Should be skipped
         run: exit 1
 
       - uses: ./
@@ -118,5 +119,6 @@ jobs:
           username: octocat
           #repository: <this repo>
 
-      - if: steps.test1.outputs.is-stargazer != 'false'
+      - if: steps.test2.outputs.is-stargazer != 'false'
+        name: Should be skipped
         run: exit 1
