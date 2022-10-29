@@ -99,14 +99,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runs-on: [ubuntu-latest, macos-latest]
-        version: [3.20.0, 3.14.0, latest]
+        runs-on: [ubuntu-latest] # , macos-latest, windows-latest
     steps:
       - uses: actions/checkout@v3
 
       - name: Run this action
         uses: ./
-        with:
-          version: ${{ matrix.version }}
-
-      - run: dnscontrol version
