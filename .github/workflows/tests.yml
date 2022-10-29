@@ -119,6 +119,6 @@ jobs:
           username: octocat
           #repository: <this repo>
 
-      - if: steps.test2.outputs.is-stargazer != false
+      - if: steps.test2.outputs.is-stargazer != 'false'
         name: Should be skipped
         run: exit 1
