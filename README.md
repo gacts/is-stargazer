@@ -21,7 +21,7 @@ jobs:
         id: check-star
         #with:
         #  github-token: ${{ github.token }}
-        #  username: ${{ github.actor }}
+        #  username: ${{ github.actor }} # or ${{ github.event.pull_request.user.login }} for PR author
         #  repository: ${{ github.repository }}
 
       - if: steps.check-star.outputs.is-stargazer != 'true'
