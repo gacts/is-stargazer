@@ -96,7 +96,7 @@ If you find any action errors, please, [make an issue][link_create_issue] in the
 
 This is open-sourced software licensed under the [MIT License][link_license].
 
-[badge_build]:https://img.shields.io/github/workflow/status/gacts/is-stargazer/tests?maxAge=30
+[badge_build]:https://img.shields.io/github/actions/workflow/status/gacts/is-stargazer/tests.yml?branch=master&maxAge=30
 [badge_release_version]:https://img.shields.io/github/release/gacts/is-stargazer.svg?maxAge=30
 [badge_license]:https://img.shields.io/github/license/gacts/is-stargazer.svg?longCache=true
 [badge_release_date]:https://img.shields.io/github/release-date/gacts/is-stargazer.svg?maxAge=180
