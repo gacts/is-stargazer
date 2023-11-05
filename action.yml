@@ -20,7 +20,7 @@ outputs:
     description: User starred a repo or not (true|false)
 
 runs:
-  using: node16
+  using: node20
   main: dist/index.js
 
 branding:
