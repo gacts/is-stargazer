@@ -26,7 +26,7 @@ async function runAction() {
       page: pageNum,
     })
 
-    core.debug(`${resp.data.length} repositories found in the response`)
+    core.info(`${resp.data.length} repositories found in the response`)
 
     if (resp.data.some(repo => repo.full_name.toLowerCase() === input.repository.toLowerCase())) {
       result = true
