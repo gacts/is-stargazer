@@ -5,19 +5,20 @@ const github = require('@actions/github') // docs: https://github.com/actions/to
 const input = {
   githubToken: core.getInput('github-token', {required: true}),
   username: core.getInput('username', {required: true}), // eg. octocat
-  repository: core.getInput('repository', {required: true}).toLowerCase(), // eg. octocat/Hello-World
+  repository: core.getInput('repository', {required: true}), // eg. octocat/Hello-World
 }
 
 // main action entrypoint
 async function runAction() {
   const octokit = github.getOctokit(input.githubToken)
+
   const perPage = 100
   let result = false
 
-  core.startGroup('⭐ Fetching stars...')
+  core.startGroup('⭐ Fetching stargazer...')
 
   for (let pageNum = 0; ; pageNum++) {
-    core.info(`🐇 Request stars page #${pageNum}...`)
+    core.info(`🐇 Request stargazer page #${pageNum}...`)
 
     const resp = await octokit.request('GET /users/{username}/starred', {
       username: input.username,
@@ -25,9 +26,9 @@ async function runAction() {
       page: pageNum,
     })
 
-    core.debug(`${resp.data.length} repositories found in the response`)
+    core.info(`${resp.data.length} repositories found in the response`)
 
-    if (resp.data.some(repo => repo.full_name.toLowerCase() === input.repository)) {
+    if (resp.data.some(repo => repo.full_name.toLowerCase() === input.repository.toLowerCase())) {
       result = true
 
       break
@@ -39,9 +40,7 @@ async function runAction() {
   }
 
   core.endGroup()
-
-  core.info((result ? '✅' : '❌') + ' Star was' + (result ? ' ' : ' not ') + 'found')
-
+  core.info((result ? '✅' : '❌') + ' The star was' + (result ? ' ' : ' not ') + 'found')
   core.setOutput('is-stargazer', result)
 }
 
