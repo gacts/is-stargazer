@@ -15,10 +15,10 @@ async function runAction() {
   const perPage = 100
   let result = false
 
-  core.startGroup('⭐ Fetching stars...')
+  core.startGroup('⭐ Fetching stargazer...')
 
   for (let pageNum = 0; ; pageNum++) {
-    core.info(`🐇 Request stars page #${pageNum}...`)
+    core.info(`🐇 Request stargazer page #${pageNum}...`)
 
     const resp = await octokit.request('GET /users/{username}/starred', {
       username: input.username,
@@ -40,7 +40,7 @@ async function runAction() {
   }
 
   core.endGroup()
-  core.info((result ? '✅' : '❌') + ' Star was' + (result ? ' ' : ' not ') + 'found')
+  core.info((result ? '✅' : '❌') + ' The star was' + (result ? ' ' : ' not ') + 'found')
   core.setOutput('is-stargazer', result)
 }
 
