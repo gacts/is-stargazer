@@ -5,12 +5,13 @@ const github = require('@actions/github') // docs: https://github.com/actions/to
 const input = {
   githubToken: core.getInput('github-token', {required: true}),
   username: core.getInput('username', {required: true}), // eg. octocat
-  repository: core.getInput('repository', {required: true}).toLowerCase(), // eg. octocat/Hello-World
+  repository: core.getInput('repository', {required: true}), // eg. octocat/Hello-World
 }
 
 // main action entrypoint
 async function runAction() {
   const octokit = github.getOctokit(input.githubToken)
+
   const perPage = 100
   let result = false
 
@@ -27,7 +28,7 @@ async function runAction() {
 
     core.debug(`${resp.data.length} repositories found in the response`)
 
-    if (resp.data.some(repo => repo.full_name.toLowerCase() === input.repository)) {
+    if (resp.data.some(repo => repo.full_name.toLowerCase() === input.repository.toLowerCase())) {
       result = true
 
       break
@@ -39,9 +40,7 @@ async function runAction() {
   }
 
   core.endGroup()
-
   core.info((result ? '✅' : '❌') + ' Star was' + (result ? ' ' : ' not ') + 'found')
-
   core.setOutput('is-stargazer', result)
 }
 
